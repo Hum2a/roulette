@@ -1,21 +1,19 @@
 import 'dart:math';
-
 import 'package:flutter/foundation.dart';
 
 class GameProvider with ChangeNotifier {
   int _balance = 1000;
   String _message = "Place your bet!";
-  int _currentBet = 0;
-  int _winningNumber = 0;
+  Map<String, int> _bets = {}; // Track bets placed (bet type, amount)
 
   int get balance => _balance;
   String get message => _message;
 
-  void placeBet(int amount, int number) {
+  void placeBet(String betType, int amount) {
     if (amount <= _balance) {
       _balance -= amount;
-      _currentBet = number;
-      _message = "Bet placed on $number! Spin the wheel.";
+      _bets[betType] = amount;
+      _message = "Bet placed on $betType! Spin the wheel.";
     } else {
       _message = "Insufficient balance!";
     }
@@ -23,13 +21,14 @@ class GameProvider with ChangeNotifier {
   }
 
   void spinWheel() {
-    _winningNumber = Random().nextInt(37); // Random number between 0 and 36
-    if (_winningNumber == _currentBet) {
-      _balance += 360; // Example payout (adjust based on actual game rules)
-      _message = "You won! The number was $_winningNumber.";
-    } else {
-      _message = "You lost! The number was $_winningNumber.";
-    }
+    int winningNumber = Random().nextInt(37); // Random number between 0 and 36
+
+    // Determine winnings
+    _bets.forEach((betType, amount) {
+      // Payout calculation logic based on bet type and winning number
+    });
+
+    _bets.clear();
     notifyListeners();
   }
 }

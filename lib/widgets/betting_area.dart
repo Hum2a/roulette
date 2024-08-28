@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import '../widgets/spin_button.dart';
 
 class BettingArea extends StatelessWidget {
+  const BettingArea({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -18,7 +21,13 @@ class BettingArea extends StatelessWidget {
               primary: isRed ? Colors.red : Colors.black,
             ),
             onPressed: () {
-              // Handle bet placement
+              // Here we pass both the amount and the number
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => SpinButton(betNumber: number),
+                ),
+              );
             },
             child: Text(
               '$number',

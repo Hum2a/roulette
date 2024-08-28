@@ -14,7 +14,7 @@ class SpinButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: () {
         // Provide both the bet amount and the number
-        gameProvider.placeBet(100, betNumber);
+        gameProvider.placeBet(100 as String, betNumber);
       },
       child: const Text('Place Bet'),
     );

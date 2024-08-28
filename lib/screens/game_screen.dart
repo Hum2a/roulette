@@ -1,10 +1,14 @@
 import 'dart:math';
+
 import 'package:flutter/material.dart';
-import '../widgets/betting_area.dart';
 import '../widgets/roulette_wheel_painter.dart';
+import '../widgets/roulette_betting_table.dart';
 
 class GameScreen extends StatefulWidget {
+  const GameScreen({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _GameScreenState createState() => _GameScreenState();
 }
 
@@ -17,7 +21,7 @@ class _GameScreenState extends State<GameScreen> with SingleTickerProviderStateM
   void initState() {
     super.initState();
     _controller = AnimationController(
-      duration: Duration(seconds: 4),
+      duration: const Duration(seconds: 4),
       vsync: this,
     );
 
@@ -47,7 +51,7 @@ class _GameScreenState extends State<GameScreen> with SingleTickerProviderStateM
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Spin the Wheel'),
+        title: const Text('Spin the Wheel'),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -55,7 +59,7 @@ class _GameScreenState extends State<GameScreen> with SingleTickerProviderStateM
           children: <Widget>[
             Transform.rotate(
               angle: _currentAngle,
-              child: Container(
+              child: SizedBox(
                 width: 300,
                 height: 300,
                 child: CustomPaint(
@@ -63,13 +67,13 @@ class _GameScreenState extends State<GameScreen> with SingleTickerProviderStateM
                 ),
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: _spinWheel,
-              child: Text('Spin the Wheel'),
+              child: const Text('Spin the Wheel'),
             ),
-            SizedBox(height: 20),
-            BettingArea(), // Add the betting area below the wheel
+            const SizedBox(height: 20),
+            RouletteBettingTable(), // Replaced with custom betting table widget
           ],
         ),
       ),
